@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -x
+
 # Set our base kernel version from the full version
 IFS='.' read -r -a VERSION_ARRAY <<< $KERNEL_FULL_VERSION
 KERNEL_BASE_VERSION="${VERSION_ARRAY[0]}.${VERSION_ARRAY[1]}"
@@ -10,7 +12,7 @@ git pull
 
 cd /opt/kernel-lt-aufs/specs-el8/
 
-dnf builddep -y kernel-lt-aufs-$KERNEL_BASE_VERSION.spec
+dnf builddep -y --nobest kernel-lt-aufs-$KERNEL_BASE_VERSION.spec
 
 cd /opt/kernel-lt-aufs/
 mkdir -p /root/rpmbuild/SOURCES
@@ -20,6 +22,9 @@ mkdir /root/rpmbuild/SRPMS
 
 cp configs-el8/config-$KERNEL_FULL_VERSION* /root/rpmbuild/SOURCES/
 cp configs-el8/cpupower.* /root/rpmbuild/SOURCES/
+cp configs-el8/cpupower.* /root/rpmbuild/SOURCES/
+cp configs-el8/mod-extra.list /root/rpmbuild/SOURCES/
+cp scripts-el8/* /root/rpmbuild/SOURCES/
 cp specs-el8/kernel-lt-aufs-$KERNEL_BASE_VERSION.spec /root/rpmbuild/SPECS/
 
 cd /root/rpmbuild/SOURCES/
