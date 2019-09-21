@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -x
-
 # Set our base kernel version from the full version
 IFS='.' read -r -a VERSION_ARRAY <<< $KERNEL_FULL_VERSION
 KERNEL_BASE_VERSION="${VERSION_ARRAY[0]}.${VERSION_ARRAY[1]}"
@@ -28,7 +26,7 @@ cp scripts-el8/* /root/rpmbuild/SOURCES/
 cp specs-el8/kernel-lt-aufs-$KERNEL_BASE_VERSION.spec /root/rpmbuild/SPECS/
 
 cd /root/rpmbuild/SOURCES/
-git clone git://github.com/sfjro/aufs4-standalone.git -b aufs$KERNEL_BASE_VERSION aufs-standalone
+git clone git://github.com/sfjro/aufs4-standalone.git -b aufs4.19.17+ aufs-standalone
 
 cd /root/rpmbuild/SOURCES/aufs-standalone
 export HEAD_COMMIT=$(git rev-parse --short HEAD); git archive $HEAD_COMMIT > ../aufs-standalone.tar
