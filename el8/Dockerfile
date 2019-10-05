@@ -1,4 +1,4 @@
-FROM roboxes/centos8
+FROM centos:8
 LABEL AUTHOR "Ben Nied <spacewreckage@gmail.com>"
 
 RUN dnf -y install gcc make bison flex git dnf-utils spectool rpm-build dnf-plugins-core
