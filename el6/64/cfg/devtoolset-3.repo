@@ -1,5 +1,0 @@
-[devtoolset-3]
-name=CentOS-6 - devtoolset-3
-baseurl=https://yum.spaceduck.org/devtoolset-3/6/x86_64/
-gpgcheck=0
-enabled=1
